@@ -1,0 +1,17 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  repository:
+    name: Repository files
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: git ls-files --error-unmatch README.md CHANGELOG.md LICENSE THIRD_PARTY_NOTICES.md .clang-format .gitignore
+
