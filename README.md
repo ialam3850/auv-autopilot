@@ -6,6 +6,7 @@ for a small underwater vehicle.
 ## Available components
 
 - Depth controller, setpoint filtering, actuator limits, and depth-rate estimation.
+- Attitude EKF, complementary filter, gyro-bias estimation, and covariance checks.
 
 ## Checks
 
