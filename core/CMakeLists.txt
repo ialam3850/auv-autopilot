@@ -2,5 +2,6 @@
 add_library(autopilot_core STATIC
   src/depth_controller.cpp
   src/attitude_ekf.cpp
-  src/complementary_filter.cpp)
+  src/complementary_filter.cpp
+  src/protocol.cpp)
 target_include_directories(autopilot_core PUBLIC include)

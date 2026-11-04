@@ -7,6 +7,7 @@ for a small underwater vehicle.
 
 - Depth controller, setpoint filtering, actuator limits, and depth-rate estimation.
 - Attitude EKF, complementary filter, gyro-bias estimation, and covariance checks.
+- COBS/CRC sensor and actuator framing in C++ and Python.
 
 ## Checks
 
@@ -16,4 +17,11 @@ From the repository root, with CMake 3.20+, Ninja, and a C++17 compiler:
 cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
 cmake --build build --parallel 2
 ctest --test-dir build --output-on-failure
+```
+
+Python checks:
+
+```bash
+python -m pip install -r requirements.txt
+(cd sim && python -m unittest discover -s tests -v)
 ```

@@ -37,4 +37,6 @@ jobs:
         run: cmake --build build
       - name: Unit tests (C++)
         run: ctest --test-dir build --output-on-failure
+      - name: Python tests (protocol, simulator, closed-loop SIL)
+        run: cd sim && python3 -m unittest discover -s tests -v
 
