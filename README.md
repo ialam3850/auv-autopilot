@@ -8,6 +8,7 @@ for a small underwater vehicle.
 - Depth controller, setpoint filtering, actuator limits, and depth-rate estimation.
 - Attitude EKF, complementary filter, gyro-bias estimation, and covariance checks.
 - COBS/CRC sensor and actuator framing in C++ and Python.
+- Autopilot command handling, arming, sample timing, and link watchdog.
 
 ## Checks
 

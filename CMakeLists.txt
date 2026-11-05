@@ -32,7 +32,8 @@ if(AP_BUILD_TESTS)
   add_executable(core_tests
     core/tests/test_depth_controller.cpp
     core/tests/test_ekf.cpp
-    core/tests/test_protocol.cpp)
+    core/tests/test_protocol.cpp
+    core/tests/test_autopilot.cpp)
   target_link_libraries(core_tests PRIVATE autopilot_core GTest::gtest_main)
   include(GoogleTest)
   gtest_discover_tests(core_tests)
