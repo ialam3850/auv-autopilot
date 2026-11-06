@@ -9,6 +9,7 @@ for a small underwater vehicle.
 - Attitude EKF, complementary filter, gyro-bias estimation, and covariance checks.
 - COBS/CRC sensor and actuator framing in C++ and Python.
 - Autopilot command handling, arming, sample timing, and link watchdog.
+- TCP SIL runner and recorded-IMU replay tool.
 
 ## Checks
 

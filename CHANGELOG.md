@@ -1,5 +1,9 @@
 # Changes
 
+## Add the TCP control runner and estimator replay tool
+
+Run the portable controller on the host and replay recorded IMU samples through both attitude estimators.
+
 ## Connect commands, estimation, and depth control
 
 Add arming, neutral outputs, command validation, sample timing, and the link watchdog.
