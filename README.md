@@ -10,6 +10,7 @@ for a small underwater vehicle.
 - COBS/CRC sensor and actuator framing in C++ and Python.
 - Autopilot command handling, arming, sample timing, and link watchdog.
 - TCP SIL runner and recorded-IMU replay tool.
+- REMUS-100 dynamics and synthetic sensor observations.
 
 ## Checks
 
