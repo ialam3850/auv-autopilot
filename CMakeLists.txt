@@ -1,4 +1,5 @@
-# Host build for the portable components currently available.
+# Host build: the portable autopilot core, its unit tests, and the SIL runner.
+# The STM32 firmware has its own build in firmware/ (cross-compiled).
 cmake_minimum_required(VERSION 3.20)
 project(auv_autopilot LANGUAGES CXX)
 
@@ -21,6 +22,9 @@ endif()
 
 add_subdirectory(core)
 
+add_executable(sil_runner host/sil_runner.cpp)
+target_link_libraries(sil_runner PRIVATE autopilot_core)
+
 if(AP_BUILD_TESTS)
   enable_testing()
   include(FetchContent)
@@ -30,8 +34,8 @@ if(AP_BUILD_TESTS)
   set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
   FetchContent_MakeAvailable(googletest)
   add_executable(core_tests
-    core/tests/test_depth_controller.cpp
     core/tests/test_ekf.cpp
+    core/tests/test_depth_controller.cpp
     core/tests/test_protocol.cpp
     core/tests/test_autopilot.cpp)
   target_link_libraries(core_tests PRIVATE autopilot_core GTest::gtest_main)
@@ -39,3 +43,7 @@ if(AP_BUILD_TESTS)
   gtest_discover_tests(core_tests)
 endif()
 
+# Replays recorded IMU data through the EKF and the complementary filter
+# (used by sim/monte_carlo.py for the estimator comparison).
+add_executable(estimator_replay host/estimator_replay.cpp)
+target_link_libraries(estimator_replay PRIVATE autopilot_core)
