@@ -11,6 +11,7 @@ for a small underwater vehicle.
 - Autopilot command handling, arming, sample timing, and link watchdog.
 - TCP SIL runner and recorded-IMU replay tool.
 - REMUS-100 dynamics and synthetic sensor observations.
+- TCP/serial control bridge, timing metrics, and closed-loop SIL checks.
 
 ## Checks
 
