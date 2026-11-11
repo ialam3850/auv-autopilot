@@ -12,6 +12,7 @@ for a small underwater vehicle.
 - TCP SIL runner and recorded-IMU replay tool.
 - REMUS-100 dynamics and synthetic sensor observations.
 - TCP/serial control bridge, timing metrics, and closed-loop SIL checks.
+- Mission runner and Monte Carlo summaries.
 
 ## Checks
 
@@ -28,4 +29,11 @@ Python checks:
 ```bash
 python -m pip install -r requirements.txt
 (cd sim && python -m unittest discover -s tests -v)
+```
+
+For a mission, start `build/sil_runner 5760 --once` in one terminal, then run:
+
+```bash
+python sim/run_mission.py --duration 360 --out runs/mission
+python sim/monte_carlo.py --runs 40 --out runs/monte-carlo
 ```
