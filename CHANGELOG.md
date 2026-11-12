@@ -1,5 +1,13 @@
 # Changes
 
+## Add mission runs and Monte Carlo summaries
+
+Run depth missions, compare estimators, and save run settings and metrics as JSON.
+
+## Close the simulation loop through the framed link
+
+Add TCP and serial bridge interfaces, timing metrics, actuator checks, and closed-loop SIL tests.
+
 ## Add the vehicle model and synthetic sensors
 
 Integrate the REMUS-100 dynamics with configurable sensor noise, bias, and water current.
