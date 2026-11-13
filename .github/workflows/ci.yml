@@ -40,3 +40,22 @@ jobs:
       - name: Python tests (protocol, simulator, closed-loop SIL)
         run: cd sim && python3 -m unittest discover -s tests -v
 
+  firmware:
+    name: STM32 drivers
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ARM toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build
+          v=13.3.1-1.1
+          curl -sSL -o tc.tar.gz https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/download/v$v/xpack-arm-none-eabi-gcc-$v-linux-x64.tar.gz
+          tar xf tc.tar.gz
+          echo "$PWD/xpack-arm-none-eabi-gcc-$v/bin" >> "$GITHUB_PATH"
+      - name: Configure board drivers
+        run: >
+          cmake -S firmware -B build-fw -G Ninja
+          -DCMAKE_TOOLCHAIN_FILE=$PWD/firmware/cmake/arm-none-eabi.cmake
+      - name: Compile board drivers
+        run: cmake --build build-fw --target board_drivers

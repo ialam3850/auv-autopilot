@@ -1,5 +1,9 @@
 # Changes
 
+## Add STM32 board setup and the DMA serial driver
+
+Add clocks, pins, cycle timing, and USART DMA reception. Cross-compile the drivers before adding an application.
+
 ## Add mission runs and Monte Carlo summaries
 
 Run depth missions, compare estimators, and save run settings and metrics as JSON.
