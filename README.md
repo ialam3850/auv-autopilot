@@ -13,6 +13,8 @@ for a small underwater vehicle.
 - REMUS-100 dynamics and synthetic sensor observations.
 - TCP/serial control bridge, timing metrics, and closed-loop SIL checks.
 - Mission runner and Monte Carlo summaries.
+- STM32F446RE clocks, pins, cycle counter, and DMA UART driver.
+- ICM-42688 SPI driver with bounded waits.
 
 ## Checks
 
@@ -37,3 +39,12 @@ For a mission, start `build/sil_runner 5760 --once` in one terminal, then run:
 python sim/run_mission.py --duration 360 --out runs/mission
 python sim/monte_carlo.py --runs 40 --out runs/monte-carlo
 ```
+
+With an Arm GNU toolchain on PATH:
+
+```bash
+cmake -S firmware -B build-fw -G Ninja -DCMAKE_TOOLCHAIN_FILE="$PWD/firmware/cmake/arm-none-eabi.cmake"
+cmake --build build-fw --target board_drivers
+```
+
+Hardware files have compile checks; physical board and underwater tests have not been performed.
