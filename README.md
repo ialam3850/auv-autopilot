@@ -14,6 +14,7 @@ for a small underwater vehicle.
 - TCP/serial control bridge, timing metrics, and closed-loop SIL checks.
 - Mission runner and Monte Carlo summaries.
 - STM32F446RE clocks, pins, cycle counter, and DMA UART driver.
+- ICM-42688 SPI driver with bounded waits.
 
 ## Checks
 

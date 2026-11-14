@@ -36,7 +36,7 @@ set(DEVICE_INCLUDES
   ${cmsis_device_f4_SOURCE_DIR}/Include
   ${cmsis_core_SOURCE_DIR}/CMSIS/Core/Include)
 
-add_library(board_drivers STATIC src/board.cpp src/uart.cpp)
+add_library(board_drivers STATIC src/board.cpp src/uart.cpp src/icm42688.cpp)
 target_include_directories(board_drivers PRIVATE src include ${DEVICE_INCLUDES}
   ${freertos_kernel_SOURCE_DIR}/include ${freertos_kernel_SOURCE_DIR}/portable/GCC/ARM_CM4F)
 target_compile_definitions(board_drivers PRIVATE ${DEVICE_DEFS})
