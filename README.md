@@ -15,6 +15,7 @@ for a small underwater vehicle.
 - Mission runner and Monte Carlo summaries.
 - STM32F446RE clocks, pins, cycle counter, and DMA UART driver.
 - ICM-42688 SPI driver with bounded waits.
+- FreeRTOS application with HIL and BENCH firmware builds.
 
 ## Checks
 
@@ -44,7 +45,7 @@ With an Arm GNU toolchain on PATH:
 
 ```bash
 cmake -S firmware -B build-fw -G Ninja -DCMAKE_TOOLCHAIN_FILE="$PWD/firmware/cmake/arm-none-eabi.cmake"
-cmake --build build-fw --target board_drivers
+cmake --build build-fw
 ```
 
 Hardware files have compile checks; physical board and underwater tests have not been performed.
