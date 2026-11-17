@@ -16,6 +16,7 @@ for a small underwater vehicle.
 - STM32F446RE clocks, pins, cycle counter, and DMA UART driver.
 - ICM-42688 SPI driver with bounded waits.
 - FreeRTOS application with HIL and BENCH firmware builds.
+- Serial bench telemetry monitor.
 
 ## Checks
 

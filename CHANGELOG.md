@@ -1,5 +1,9 @@
 # Changes
 
+## Add the bench telemetry monitor
+
+Decode serial telemetry for bench checks and save measurements to CSV. Physical hardware validation remains separate.
+
 ## Build the FreeRTOS autopilot application
 
 Add startup, tasks, queues, control deadlines, and diagnostics. Cross-compile HIL and BENCH images.
