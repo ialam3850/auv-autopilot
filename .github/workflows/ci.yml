@@ -39,6 +39,14 @@ jobs:
         run: ctest --test-dir build --output-on-failure
       - name: Python tests (protocol, simulator, closed-loop SIL)
         run: cd sim && python3 -m unittest discover -s tests -v
+      - name: SIL mission
+        if: matrix.config == 'release'
+        run: scripts/run_sil.sh runs/ci
+      - uses: actions/upload-artifact@v4
+        if: matrix.config == 'release'
+        with:
+          name: sil-mission
+          path: runs/ci.*
 
   firmware:
     name: firmware (${{ matrix.mode }})

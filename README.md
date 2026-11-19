@@ -17,6 +17,7 @@ for a small underwater vehicle.
 - ICM-42688 SPI driver with bounded waits.
 - FreeRTOS application with HIL and BENCH firmware builds.
 - Serial bench telemetry monitor.
+- Fault-recovery regressions and host/SIL helper scripts.
 
 ## Checks
 
