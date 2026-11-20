@@ -1,53 +1,55 @@
-# AUV autopilot
+# auv-autopilot
 
-Portable control and estimation code, a vehicle simulator, and STM32 firmware
-for a small underwater vehicle.
+A C++17 depth autopilot and attitude estimator for a simulated underwater
+vehicle. The same core is used by the Linux runner and STM32F446 firmware.
 
-## Available components
+![Depth mission](docs/img/mission.png)
 
-- Depth controller, setpoint filtering, actuator limits, and depth-rate estimation.
-- Attitude EKF, complementary filter, gyro-bias estimation, and covariance checks.
-- COBS/CRC sensor and actuator framing in C++ and Python.
-- Autopilot command handling, arming, sample timing, and link watchdog.
-- TCP SIL runner and recorded-IMU replay tool.
-- REMUS-100 dynamics and synthetic sensor observations.
-- TCP/serial control bridge, timing metrics, and closed-loop SIL checks.
-- Mission runner and Monte Carlo summaries.
-- STM32F446RE clocks, pins, cycle counter, and DMA UART driver.
-- ICM-42688 SPI driver with bounded waits.
-- FreeRTOS application with HIL and BENCH firmware builds.
-- Serial bench telemetry monitor.
-- Fault-recovery regressions and host/SIL helper scripts.
+## Status
 
-## Checks
+Software-in-the-loop is working. The supplied 40-run study reports 4.2 cm
+median settled depth error and 0.069° median pitch RMS error. Firmware has
+not been run on a board. The EKF's covariance is conservative; see the report.
 
-From the repository root, with CMake 3.20+, Ninja, and a C++17 compiler:
+## Build and test
+
+Needs CMake 3.20+, a C++17 compiler, Ninja, and Python 3.10+.
 
 ```bash
-cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+pip install -r requirements.txt
+cmake -S . -B build -G Ninja
 cmake --build build --parallel 2
 ctest --test-dir build --output-on-failure
-```
-
-Python checks:
-
-```bash
-python -m pip install -r requirements.txt
 (cd sim && python -m unittest discover -s tests -v)
+bash scripts/run_sil.sh
+# Or run the complete host checks:
+bash scripts/check_host.sh
 ```
 
-For a mission, start `build/sil_runner 5760 --once` in one terminal, then run:
+## Layout
 
-```bash
-python sim/run_mission.py --duration 360 --out runs/mission
-python sim/monte_carlo.py --runs 40 --out runs/monte-carlo
-```
+- `core/`: EKF, depth controller, and framed protocol; fixed-size storage.
+- `host/`: TCP runner and estimator replay.
+- `sim/`: REMUS-100 model, sensor simulation, missions, and Monte Carlo study.
+- `firmware/`: STM32F446, FreeRTOS, SPI IMU, and UART/DMA.
 
-With an Arm GNU toolchain on PATH:
+The estimator tracks roll, pitch, and two gyro biases. Depth control uses
+an outer depth loop and inner pitch loop with actuator limits and anti-windup.
+Messages use COBS framing and CRC-16 over TCP or UART. Input checks reject
+invalid samples. HIL includes a sensor-stream timeout; SPI polling is bounded.
+Real-time runs count replies against the 20 ms period and report link latency.
 
-```bash
-cmake -S firmware -B build-fw -G Ninja -DCMAKE_TOOLCHAIN_FILE="$PWD/firmware/cmake/arm-none-eabi.cmake"
-cmake --build build-fw
-```
+## Limits
 
-Hardware files have compile checks; physical board and underwater tests have not been performed.
+Gains are tuned at 1200 rpm on one simulated hull. The EKF does not estimate
+yaw. The firmware outputs serial actuator messages; physical PWM outputs,
+depth-sensor hardware, and on-board timing measurements are pending.
+
+## Details
+
+[Design](docs/DESIGN.md) · [Results](docs/REPORT.md) ·
+[Hardware setup](docs/HARDWARE.md) · [Fault behavior](docs/FAULTS.md) ·
+[Changes](CHANGELOG.md)
+
+Vehicle dynamics: Fossen's Python Vehicle Simulator, MIT license.
+See [third-party notices](THIRD_PARTY_NOTICES.md). MIT license.
