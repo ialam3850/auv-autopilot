@@ -1,5 +1,13 @@
 # Changes
 
+## Document the design, simulation results, and hardware procedure
+
+Add design notes, validation commands, fault behavior, recorded plots, and hardware status.
+
+## Check host requirements and link fault recovery
+
+Add TCP disconnect and corrupt-frame regressions, a host check, and the repeatable SIL mission script.
+
 ## Add the bench telemetry monitor
 
 Decode serial telemetry for bench checks and save measurements to CSV. Physical hardware validation remains separate.
